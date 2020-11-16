@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Path : MonoBehaviour
@@ -15,15 +16,16 @@ public class Path : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if(waypoints == null || waypoints.Count == 0)
+        if (waypoints == null || waypoints.Count == 0)
         {
-            return; //exit method
+            return; // exit method
         }
 
-        for(int i = 0; i < waypoints.Count; i++)
+        for (var i = 0; i < waypoints.Count; i++)
         {
-            Transform waypoint = waypoints[i];
-            if(waypoint == null)
+            var waypoint = waypoints[i];
+
+            if (waypoint == null)
             {
                 continue; // go to next interation of this loop (if 1 is 0, i becomes 1 ect)
             }
@@ -31,10 +33,11 @@ public class Path : MonoBehaviour
             Gizmos.color = Color.cyan;
             Gizmos.DrawCube(waypoint.position, gizmoSize);
 
-            if (i + 1 < waypoints.Count && waypoints[i+1] != null) //check if waypoint is valid
+            if (i + 1 < waypoints.Count && waypoints[i + 1] != null)
             {
-                Gizmos.DrawLine(waypoint.position, waypoints[i + 1].position); //draw line to next waypoint
-            } 
+                // check if waypoint is valid
+                Gizmos.DrawLine(waypoint.position, waypoints[i + 1].position); // draw line to next waypoint
+            }
         }
     }
 }

@@ -1,26 +1,29 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
-//gameobject must have Collider2D attached
+// gameobject must have Collider2D attached
 [RequireComponent(typeof(Collider2D))]
 public class FlockAgent : MonoBehaviour
 {
-    Flock agentFlock;
-    public Flock AgentFlock { get { return agentFlock; } }
-    private Collider2D agentCollider;
-    public Collider2D AgentCollider { get { return agentCollider; } }
-    void Start()
-    {
-        agentCollider = GetComponent<Collider2D>();
-    }
+    public Flock ParentFlock { get; private set; }
+
+    public Collider2D AgentCollider { get; private set; }
+
     public void Initialize(Flock flock)
     {
-        agentFlock = flock;
+        ParentFlock = flock;
     }
+
     public void Move(Vector2 velocity)
     {
         transform.up = velocity;
         transform.position += (Vector3)velocity * Time.deltaTime;
+    }
+
+    private void Start()
+    {
+        AgentCollider = GetComponent<Collider2D>();
     }
 }
