@@ -42,7 +42,7 @@ public class SteeredCohesionBehavior : FilteredFlockBehavior
 
         // create offset from agent position
         cohesionMove -= (Vector2)agent.transform.position;
-
+        
         cohesionMove = Vector2.SmoothDamp(
                 agent.transform.up,
                 cohesionMove,

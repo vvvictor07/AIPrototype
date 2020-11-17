@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
@@ -8,22 +9,26 @@ public class SameFlockFilter : ContextFilter
 {
     public override List<Transform> Filter(FlockAgent agent, List<Transform> original)
     {
-        var filtered = new List<Transform>();
+        // var filtered = new List<Transform>();
+        //
+        // foreach (var item in original)
+        // {
+        //     var itemAgent = item.GetComponent<FlockAgent>();
+        //
+        //     if (itemAgent != null)
+        //     {
+        //         // && itemAgent.AgentFlock == agent.AgentFlock)
+        //         if (itemAgent.ParentFlock == agent.ParentFlock)
+        //         {
+        //             filtered.Add(item);
+        //         }
+        //     }
+        // }
 
-        foreach (var item in original)
-        {
-            var itemAgent = item.GetComponent<FlockAgent>();
+        // return filtered;
 
-            if (itemAgent != null)
-            {
-                // && itemAgent.AgentFlock == agent.AgentFlock)
-                if (itemAgent.ParentFlock == agent.ParentFlock)
-                {
-                    filtered.Add(item);
-                }
-            }
-        }
-
-        return filtered;
+        return original
+            .Where(x => x.GetComponent<FlockAgent>()?.ParentFlock == agent.ParentFlock)
+            .ToList();
     }
 }

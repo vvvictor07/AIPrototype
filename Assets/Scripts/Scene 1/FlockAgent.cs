@@ -11,9 +11,17 @@ public class FlockAgent : MonoBehaviour
 
     public Collider2D AgentCollider { get; private set; }
 
+    private Animator animator;
+
     public void Initialize(Flock flock)
     {
         ParentFlock = flock;
+
+        if (ParentFlock.name.Equals("Red"))
+        {
+            animator = gameObject.AddComponent<Animator>();
+            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animation/NPCFSM");
+        }
     }
 
     public void Move(Vector2 velocity)

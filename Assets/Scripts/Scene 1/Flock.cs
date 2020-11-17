@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class Flock : MonoBehaviour
 
     public FlockBehavior behavior;
 
-    [Range(10, 500)]
+    [Range(1, 500)]
     public int InitialQuantity = 250;
 
     [Range(1f, 100f)]
@@ -60,6 +61,7 @@ public class Flock : MonoBehaviour
                     transform
                 );
             newAgent.name = "Agent " + i;
+            
             newAgent.Initialize(this);
             agents.Add(newAgent);
         }
@@ -73,7 +75,7 @@ public class Flock : MonoBehaviour
 
             // testing code
             // agent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f); // closer to 1 is white, closer to 6 is red+++++++++
-            var calculatedMoveSpeed = behavior.CalculateMoveSpeed(agent, context);
+            var calculatedMoveSpeed = behavior ? behavior.CalculateMoveSpeed(agent, context) : Vector2.zero;
             calculatedMoveSpeed *= DriveFactor;
 
             if (calculatedMoveSpeed.sqrMagnitude > squareMaxSpeed)
@@ -89,7 +91,7 @@ public class Flock : MonoBehaviour
     {
         var context = new List<Transform>();
         var contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, NeighborRadius);
-
+        
         foreach (var c in contextColliders)
         {
             if (c != agent.AgentCollider)

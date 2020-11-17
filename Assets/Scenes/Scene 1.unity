@@ -697,6 +697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 669864990}
   - component: {fileID: 669864991}
+  - component: {fileID: 669864992}
   m_Layer: 0
   m_Name: Red
   m_TagString: Untagged
@@ -733,12 +734,31 @@ MonoBehaviour:
   agentPrefab: {fileID: 4426811061439797200, guid: 78d0185a570f1b149b03523a84dc467b,
     type: 3}
   behavior: {fileID: 11400000, guid: 4408fc748fef0a046870f51a89918a4f, type: 2}
-  startingCount: 10
-  driveFactor: 10
-  maxSpeed: 2
-  neighborRadius: 4
-  avoidanceRadiusMultiplier: 0.2
-  smallRadiusMultiplier: 0.3
+  InitialQuantity: 10
+  DriveFactor: 10
+  MaxAgentSpeed: 2
+  NeighborRadius: 4
+  AvoidanceRadiusMultiplier: 0.2
+  SmallRadiusMultiplier: 0.3
+--- !u!95 &669864992
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669864989}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1316641916
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,12 +889,12 @@ MonoBehaviour:
   agentPrefab: {fileID: 5332177913551281949, guid: 7ee4d6693c2c9f943942938598406c3d,
     type: 3}
   behavior: {fileID: 11400000, guid: 6a47628290c81bd4e8b03b4b027f0411, type: 2}
-  startingCount: 100
-  driveFactor: 10
-  maxSpeed: 5
-  neighborRadius: 4
-  avoidanceRadiusMultiplier: 0.3
-  smallRadiusMultiplier: 0.2
+  InitialQuantity: 100
+  DriveFactor: 10
+  MaxAgentSpeed: 5
+  NeighborRadius: 4
+  AvoidanceRadiusMultiplier: 0.3
+  SmallRadiusMultiplier: 0.2
 --- !u!4 &1877240728
 Transform:
   m_ObjectHideFlags: 0
