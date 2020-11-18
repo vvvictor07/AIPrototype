@@ -20,18 +20,19 @@ public class CompositeBehavior : FlockBehavior
     {
         var moveSpeed = Vector2.zero;
 
-        for (var i = 0; i < Behaviors.Length; i++)
+        // for (var i = 0; i < Behaviors.Length; i++)
+        foreach (var behaviorGroup in Behaviors)
         {
             // gets the calculated move method of each behavior attached
-            var partialMoveSpeed = Behaviors[i].Behavior.CalculateMoveSpeed(agent, context) * Behaviors[i].Weight;
+            var partialMoveSpeed = behaviorGroup.Behavior.CalculateMoveSpeed(agent, context) * behaviorGroup.Weight;
 
             if (partialMoveSpeed != Vector2.zero)
             {
                 // check the number we get for moving the agent isn't larger than the weight given
-                if (partialMoveSpeed.sqrMagnitude > Behaviors[i].Weight * Behaviors[i].Weight)
+                if (partialMoveSpeed.sqrMagnitude > behaviorGroup.Weight * behaviorGroup.Weight)
                 {
                     partialMoveSpeed.Normalize();
-                    partialMoveSpeed *= Behaviors[i].Weight;
+                    partialMoveSpeed *= behaviorGroup.Weight;
                 }
 
                 // bring all the behaviors together as one

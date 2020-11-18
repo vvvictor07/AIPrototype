@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
@@ -48,5 +49,14 @@ public class FlockAgent : MonoBehaviour
     private void Start()
     {
         AgentCollider = GetComponent<Collider2D>();
+    }
+
+    public List<Transform> GetNearbyObjectsByRadius(float radius)
+    {
+        return Physics2D
+            .OverlapCircleAll(transform.position, radius)
+            .Where(x => x != AgentCollider)
+            .Select(x => x.transform)
+            .ToList();
     }
 }

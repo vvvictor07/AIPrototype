@@ -6,11 +6,21 @@ using UnityEngine;
 
 public class Flocking : StateMachineBehaviour
 {
+    [System.Serializable]
+    public class BehaviorGroup
+    {
+        public FlockBehavior Behavior { get; set; }
+
+        public float Weight { get; set; }
+    }
+
+    public List<BehaviorGroup> Behaviors; 
+    
     private GameObject NPC;
 
     private FlockAgent flockAgent;
 
-    private ContextFilter filter;
+    // private ContextFilter filter;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -19,25 +29,41 @@ public class Flocking : StateMachineBehaviour
         flockAgent = NPC.GetComponent<FlockAgent>();
         
         // filter = CreateInstance<DifferentFlockFilter>();
-        filter = CreateInstance<SameFlockFilter>();
+        // filter = CreateInstance<SameFlockFilter>();
+
+        Behaviors = new List<BehaviorGroup>
+                        {
+                            new BehaviorGroup{Behavior = CreateInstance<CohesionBh>().Init(CreateInstance<SameFlockFilter>()), Weight = 1f},
+                            new BehaviorGroup{Behavior = CreateInstance<CollisionAvoidanceBh>().Init(CreateInstance<SameFlockFilter>()), Weight = 1f},
+                        };
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var nearbyObjects = GetNearbyObjectsByRadius(flockAgent, flockAgent.ParentFlock.NeighborRadius);
+        var nearbyObjects = flockAgent.GetNearbyObjectsByRadius(flockAgent.ParentFlock.NeighborRadius);
 
-        var nearbyAgents = nearbyObjects.Where(x => x.GetComponent<FlockAgent>()?.ParentFlock == flockAgent.ParentFlock).ToList();
+        var totalWeight = Behaviors.Sum(behaviorGroup => behaviorGroup.Weight);
 
-        flockAgent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, nearbyAgents.Count / 6f); // closer to 1 is white, closer to 6 is red+++++++++
+        foreach (var behaviorGroup in Behaviors)
+        {
+            var partialVelocity = behaviorGroup.Behavior.CalculateMoveSpeed(flockAgent, nearbyObjects);
+            flockAgent.Velocity += partialVelocity * behaviorGroup.Weight / totalWeight;
+        }
 
-        var calculatedCohesionVelocity = CalculateCohesionVelocity(flockAgent, nearbyAgents);
-        calculatedCohesionVelocity *= 5f;
+        // filtration 
+        // var nearbyAgents = nearbyObjects.Where(x => x.GetComponent<FlockAgent>()?.ParentFlock == flockAgent.ParentFlock).ToList();
+        // var nearbyAgents = filter != null ? filter.Filter(flockAgent, nearbyObjects);
 
-        var calculatedDistanceVelocity = CalculateDistanceVelocity(flockAgent, nearbyAgents);
+        // flockAgent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, nearbyObjects.Count / 6f); // closer to 1 is white, closer to 6 is red+++++++++
 
-        flockAgent.Velocity += calculatedCohesionVelocity;
-        flockAgent.Velocity += calculatedDistanceVelocity;
+        // var calculatedCohesionVelocity = CalculateCohesionVelocity(flockAgent, nearbyObjects);
+        // calculatedCohesionVelocity *= 5f;
+        //
+        // var calculatedDistanceVelocity = CalculateDistanceVelocity(flockAgent, nearbyObjects);
+        //
+        // flockAgent.Velocity += calculatedCohesionVelocity;
+        // flockAgent.Velocity += calculatedDistanceVelocity;
         flockAgent.UpdatePosition();
 
         // flockAgent.Move(calculatedMoveSpeed);
@@ -114,22 +140,22 @@ public class Flocking : StateMachineBehaviour
         return average;
     }
 
-    private List<FlockAgent> GetNearbyFlockAgentsByRadius(FlockAgent agent, float radius)
-    {
-        return Physics2D
-            .OverlapCircleAll(agent.transform.position, radius)
-            .Where(x => x != agent.AgentCollider)
-            .Select(x => x.GetComponent<FlockAgent>())
-            .Where(x => x != null)
-            .ToList();
-    }
-
-    private List<Transform> GetNearbyObjectsByRadius(FlockAgent agent, float radius)
-    {
-        return Physics2D
-            .OverlapCircleAll(agent.transform.position, radius)
-            .Where(x => x != agent.AgentCollider)
-            .Select(x => x.transform)
-            .ToList();
-    }
+    // private List<FlockAgent> GetNearbyFlockAgentsByRadius(FlockAgent agent, float radius)
+    // {
+    //     return Physics2D
+    //         .OverlapCircleAll(agent.transform.position, radius)
+    //         .Where(x => x != agent.AgentCollider)
+    //         .Select(x => x.GetComponent<FlockAgent>())
+    //         .Where(x => x != null)
+    //         .ToList();
+    // }
+    //
+    // private List<Transform> GetNearbyObjectsByRadius(FlockAgent agent, float radius)
+    // {
+    //     return Physics2D
+    //         .OverlapCircleAll(agent.transform.position, radius)
+    //         .Where(x => x != agent.AgentCollider)
+    //         .Select(x => x.transform)
+    //         .ToList();
+    // }
 }
