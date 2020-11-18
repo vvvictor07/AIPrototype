@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6756711771992718951}
   - component: {fileID: 3831478397042218669}
   - component: {fileID: 4426811061439797200}
+  - component: {fileID: 6702624953673713823}
   m_Layer: 0
   m_Name: Agent Red
   m_TagString: Untagged
@@ -111,3 +112,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cde311ef8fda67499864fd749b3530c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &6702624953673713823
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674124143498444044}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba50c17a85764ba4abecf16004045dbc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

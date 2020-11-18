@@ -21,11 +21,11 @@ public class FlockAgent : MonoBehaviour
 
         Velocity = Vector2.right * 5;
 
-        if (ParentFlock.name.Equals("Red"))
-        {
-            animator = gameObject.AddComponent<Animator>();
-            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animation/NPCFSM");
-        }
+        // if (ParentFlock.name.Equals("Red"))
+        // {
+        //     animator = gameObject.AddComponent<Animator>();
+        //     animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animation/NPCFSM");
+        // }
     }
 
     public void Move(Vector2 velocity)

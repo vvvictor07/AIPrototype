@@ -733,9 +733,9 @@ MonoBehaviour:
   agentPrefab: {fileID: 4426811061439797200, guid: 78d0185a570f1b149b03523a84dc467b,
     type: 3}
   behavior: {fileID: 0}
-  InitialQuantity: 2
-  DriveFactor: 10
-  MaxAgentSpeed: 2
+  InitialQuantity: 10
+  DriveFactor: 5
+  MaxAgentSpeed: 3
   NeighborRadius: 4
   AvoidanceRadiusMultiplier: 0.2
   SmallRadiusMultiplier: 0.3
