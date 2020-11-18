@@ -19,7 +19,7 @@ public class Flock : MonoBehaviour
     [Range(1f, 100f)]
     public float MaxAgentSpeed = 5f;
 
-    [Range(1f, 10f)]
+    [Range(0f, 10f)]
     public float NeighborRadius = 1.5f;
 
     [Range(0f, 1f)]
@@ -28,7 +28,7 @@ public class Flock : MonoBehaviour
     [Range(0f, 1f)]
     public float SmallRadiusMultiplier = 0.2f;
 
-    private const float AgentDensity = 0.08f;
+    private const float AgentDensity = 0.01f;
 
     private float squareMaxSpeed;
 
@@ -60,7 +60,7 @@ public class Flock : MonoBehaviour
                     Quaternion.Euler(Vector3.forward * Random.Range(0, 360f)),
                     transform
                 );
-            newAgent.name = "Agent " + i;
+            newAgent.name = name + " Agent " + i;
             
             newAgent.Initialize(this);
             agents.Add(newAgent);
@@ -69,21 +69,26 @@ public class Flock : MonoBehaviour
 
     private void Update()
     {
-        foreach (var agent in agents)
+        if (behavior != null)
         {
-            var context = GetNearbyObjects(agent);
-
-            // testing code
-            // agent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f); // closer to 1 is white, closer to 6 is red+++++++++
-            var calculatedMoveSpeed = behavior ? behavior.CalculateMoveSpeed(agent, context) : Vector2.zero;
-            calculatedMoveSpeed *= DriveFactor;
-
-            if (calculatedMoveSpeed.sqrMagnitude > squareMaxSpeed)
+            foreach (var agent in agents)
             {
-                calculatedMoveSpeed = calculatedMoveSpeed.normalized * MaxAgentSpeed;
-            }
+                var context = GetNearbyObjects(agent);
 
-            agent.Move(calculatedMoveSpeed);
+                // testing code
+                // agent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f); // closer to 1 is white, closer to 6 is red+++++++++
+
+                var calculatedMoveSpeed = behavior.CalculateMoveSpeed(agent, context);
+                calculatedMoveSpeed *= DriveFactor;
+
+                if (calculatedMoveSpeed.sqrMagnitude > squareMaxSpeed)
+                {
+                    calculatedMoveSpeed = calculatedMoveSpeed.normalized * MaxAgentSpeed;
+                }
+
+                agent.Move(calculatedMoveSpeed);
+
+            }
         }
     }
 

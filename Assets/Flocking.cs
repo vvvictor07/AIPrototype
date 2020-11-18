@@ -12,36 +12,39 @@ public class Flocking : StateMachineBehaviour
 
     private ContextFilter filter;
 
-    private Vector2 currentVelocity;
-
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         NPC = animator.gameObject;
         flockAgent = NPC.GetComponent<FlockAgent>();
-        filter = CreateInstance<DifferentFlockFilter>();
+        
+        // filter = CreateInstance<DifferentFlockFilter>();
+        filter = CreateInstance<SameFlockFilter>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var context = GetNearbyObjectsTransforms(flockAgent);
+        var agents = GetNearbyObjectsByRadius(flockAgent, flockAgent.ParentFlock.NeighborRadius);
 
-        // context = filter.Filter(flockAgent, context);
+        agents = agents.Where(x => x.ParentFlock == flockAgent.ParentFlock).ToList();
 
-        flockAgent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f); // closer to 1 is white, closer to 6 is red+++++++++
+        flockAgent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, agents.Count / 6f); // closer to 1 is white, closer to 6 is red+++++++++
 
-        var calculatedMoveSpeed = CalculateMoveSpeed(flockAgent, context);
-        calculatedMoveSpeed *= 10f;
+        var calculatedCohesionVelocity = CalculateCohesionVelocity(flockAgent, agents);
+        calculatedCohesionVelocity *= 5f;
 
-        if (calculatedMoveSpeed.sqrMagnitude > flockAgent.ParentFlock.MaxAgentSpeed)
-        {
-            calculatedMoveSpeed = calculatedMoveSpeed.normalized * flockAgent.ParentFlock.MaxAgentSpeed;
-        }
+        var calculatedDistanceVelocity = CalculateDistanceVelocity(flockAgent, agents);
+
+        flockAgent.Velocity += calculatedCohesionVelocity;
+        flockAgent.Velocity += calculatedDistanceVelocity;
+        flockAgent.UpdatePosition();
 
         // flockAgent.Move(calculatedMoveSpeed);
-        flockAgent.transform.up = calculatedMoveSpeed;
-        flockAgent.transform.position += (Vector3)calculatedMoveSpeed * Time.deltaTime;
+        // flockAgent.transform.up = calculatedMoveSpeed;
+        // flockAgent.transform.position += (Vector3)flockAgent.Velocity * Time.deltaTime;
+        // flockAgent.transform.up = (Vector3)flockAgent.Velocity;
+        // flockAgent.transform.rotation = Quaternion.LookRotation((Vector3)calculatedVelocity);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -49,53 +52,75 @@ public class Flocking : StateMachineBehaviour
     {
     }
 
-    private Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
+    private Vector2 CalculateDistanceVelocity(FlockAgent currentAgent, List<FlockAgent> otherAgents)
     {
-        // if no neighbours, return no adjustment
-        if (context.Count == 0)
+        var c = Vector2.zero;
+
+        if (otherAgents.Count > 0)
         {
-            return Vector2.zero;
-        }
-
-        // all add points together and average
-        var cohesionMove = Vector2.zero;
-
-        var count = 0;
-
-        foreach (var item in context)
-        {
-            // instead of context
-            if (Vector2.SqrMagnitude(item.position - agent.transform.position) <= agent.ParentFlock.SquareSmallRadius)
+            foreach (var agent in otherAgents)
             {
-                cohesionMove += (Vector2)item.position;
-                count++;
+                var distance = agent.transform.position - currentAgent.transform.position;
+
+                if (distance.magnitude < 2)
+                {
+                    c -= (Vector2)distance;
+                }
             }
         }
 
-        if (count != 0)
+        return c;
+    }
+
+    private Vector2 CalculateCohesionVelocity(FlockAgent currentAgent, List<FlockAgent> otherAgents)
+    {
+        // all add points together and average
+        var average = Vector2.zero;
+
+        // var count = 0;
+
+        if (otherAgents.Count > 0)
         {
-            cohesionMove /= count;
+            foreach (var agent in otherAgents)
+            {
+                // var diff = agent.transform.position - currentAgent.transform.position;
+                // instead of context
+                // if (Vector2.SqrMagnitude(item.position - agent.transform.position) <= agent.ParentFlock.SquareSmallRadius)
+                // if (diff.magnitude < agent.ParentFlock.NeighborRadius)
+                // {
+                average += (Vector2)agent.transform.position;
+                // count += 1;
+                // }
+            }
+
+            average /= otherAgents.Count;
+            average -= (Vector2)currentAgent.transform.position;
+            average /= 100;
+
+            // average = Vector2.Lerp(Vector2.zero, average, average.magnitude / agent.ParentFlock.NeighborRadius);
+            // average += Vector2.Lerp(Vector2.zero, average, 0.01f);
         }
 
         // create offset from agent position
-        cohesionMove -= (Vector2)agent.transform.position;
+        // cohesionMove -= (Vector2)agent.transform.position;
 
-        cohesionMove = Vector2.SmoothDamp(
-                agent.transform.up,
-                cohesionMove,
-                ref currentVelocity,
-                0.001f
-            );
+        // cohesionMove = Vector2.SmoothDamp(
+        //         agent.transform.up,
+        //         cohesionMove,
+        //         ref currentVelocity,
+        //         0.001f
+        //     );
 
-        return cohesionMove;
+        return average;
     }
 
-    private List<Transform> GetNearbyObjectsTransforms(FlockAgent agent)
+    private List<FlockAgent> GetNearbyObjectsByRadius(FlockAgent agent, float radius)
     {
         return Physics2D
-            .OverlapCircleAll(agent.transform.position, agent.ParentFlock.NeighborRadius)
+            .OverlapCircleAll(agent.transform.position, radius)
             .Where(x => x != agent.AgentCollider)
-            .Select(x => x.transform)
+            .Select(x => x.GetComponent<FlockAgent>())
+            .Where(x => x != null)
             .ToList();
     }
 }
