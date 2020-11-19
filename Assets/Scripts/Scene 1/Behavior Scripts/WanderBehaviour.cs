@@ -26,15 +26,7 @@ public class WanderBehaviour : FilteredFlockBehavior
     {
         waypointDirection = (Vector2)path.waypoints[currentWaypoint].position - (Vector2)agent.transform.position;
 
-        if (waypointDirection.magnitude < path.radius)
-        {
-            // waypoint Direction.magnitude is distance of the vector
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return waypointDirection.magnitude < path.radius;
     }
 
     public Vector2 FollowPath(FlockAgent agent)

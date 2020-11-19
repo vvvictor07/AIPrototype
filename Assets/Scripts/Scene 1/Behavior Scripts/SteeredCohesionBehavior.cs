@@ -12,6 +12,8 @@ public class SteeredCohesionBehavior : FilteredFlockBehavior
 
     public override Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
     {
+        Debug.Log("SteeredCohesionBehavior " + GetInstanceID());
+
         // if no neighbours, return no adjustment
         if (context.Count == 0)
         {
@@ -42,13 +44,13 @@ public class SteeredCohesionBehavior : FilteredFlockBehavior
 
         // create offset from agent position
         cohesionMove -= (Vector2)agent.transform.position;
-        
-        cohesionMove = Vector2.SmoothDamp(
-                agent.transform.up,
+
+        cohesionMove = Vector2.SmoothDamp(agent.transform.up,
                 cohesionMove,
                 ref currentVelocity,
                 agentSmoothTime
             );
+
         return cohesionMove;
     }
 }

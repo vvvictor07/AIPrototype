@@ -872,7 +872,7 @@ MonoBehaviour:
   InitialQuantity: 100
   DriveFactor: 10
   MaxAgentSpeed: 5
-  NeighborRadius: 4
+  NeighborRadius: 10
   AvoidanceRadiusMultiplier: 0.3
   SmallRadiusMultiplier: 0.2
 --- !u!4 &1877240728

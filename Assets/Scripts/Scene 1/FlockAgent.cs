@@ -14,13 +14,13 @@ public class FlockAgent : MonoBehaviour
 
     public Vector2 Velocity { get; set; }
 
-    private Animator animator;
+    // private Animator animator;
 
     public void Initialize(Flock flock)
     {
         ParentFlock = flock;
 
-        Velocity = Vector2.right * 5;
+        Velocity = Vector2.up;
 
         // if (ParentFlock.name.Equals("Red"))
         // {

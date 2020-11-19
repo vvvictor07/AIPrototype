@@ -9,24 +9,33 @@ public class CollisionAvoidanceBh : FilteredFlockBehavior
     {
         // try to filter objects
         context = Filter != null ? Filter.Filter(agent, context) : context;
+        agent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f); // closer to 1 is white, closer to 6 is red+++++++++
 
-        // all add points together and average
-        var average = Vector2.zero;
-
-        // var count = 0;
+        var c = Vector2.zero;
+        var minimalDistance = 2f;
 
         if (context.Count > 0)
         {
             foreach (var obj in context)
             {
-                average += (Vector2)obj.position;
-            }
+                var distance = obj.position - agent.transform.position;
 
-            average /= context.Count;
-            average -= (Vector2)agent.transform.position;
-            average /= 100;
+                if (distance.magnitude < minimalDistance)
+                {
+                    minimalDistance = distance.magnitude;
+                }
+
+                if (distance.magnitude < 2)
+                {
+                    c -= (Vector2)distance;
+                }
+            }
         }
 
-        return average;
+        var part = (2f - minimalDistance) / 2f;
+
+        c = Vector2.Lerp(Vector2.zero, c, part);
+
+        return c;
     }
 }
