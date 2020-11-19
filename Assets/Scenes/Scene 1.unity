@@ -868,8 +868,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 5332177913551281949, guid: 7ee4d6693c2c9f943942938598406c3d,
     type: 3}
-  behavior: {fileID: 11400000, guid: 9711d75794e08ae48b0e3dfadf6cd0cb, type: 2}
-  InitialQuantity: 10
+  behavior: {fileID: 0}
+  InitialQuantity: 20
   DriveFactor: 10
   MaxAgentSpeed: 5
   NeighborRadius: 10

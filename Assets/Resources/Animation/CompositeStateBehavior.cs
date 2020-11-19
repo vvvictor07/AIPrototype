@@ -6,14 +6,12 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Flock/FSMBehavior/Flocking")]
 
-public class Flocking : StateMachineBehaviour
+public class CompositeStateBehavior : StateMachineBehaviour
 {
     [System.Serializable]
     public class BehaviorGroup
     {
         public FlockBehavior Behavior;
-
-        // public ContextFilter Filter;
 
         public float Weight;
     }
@@ -25,8 +23,6 @@ public class Flocking : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Floking " + GetInstanceID());
-
         flockAgent = animator.gameObject.GetComponent<FlockAgent>();
 
         foreach (var behaviorGroup in Behaviors)
@@ -56,11 +52,8 @@ public class Flocking : StateMachineBehaviour
         }
 
         // flockAgent.Velocity += Vector2.Lerp(flockAgent.Velocity, newVelocity, newVelocity.magnitude / flockAgent.ParentFlock.NeighborRadius);
-        flockAgent.Velocity = newVelocity;
-
         // flockAgent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, nearbyAgents.Count / 6f); // closer to 1 is white, closer to 6 is red+++++++++
-
-        flockAgent.UpdatePosition();
+        flockAgent.UpdatePosition(newVelocity);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

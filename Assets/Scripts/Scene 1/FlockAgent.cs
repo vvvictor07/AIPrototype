@@ -8,25 +8,19 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class FlockAgent : MonoBehaviour
 {
-    public Flock ParentFlock { get; private set; }
+    public Flock ParentFlock;
 
-    public Collider2D AgentCollider { get; private set; }
+    public Collider2D AgentCollider;
 
-    public Vector2 Velocity { get; set; }
+    // public Vector2 Velocity;
 
-    // private Animator animator;
+    private Animator animator;
 
     public void Initialize(Flock flock)
     {
         ParentFlock = flock;
 
-        Velocity = Vector2.up;
-
-        // if (ParentFlock.name.Equals("Red"))
-        // {
-        //     animator = gameObject.AddComponent<Animator>();
-        //     animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animation/NPCFSM");
-        // }
+        // Velocity = Vector2.up;
     }
 
     public void Move(Vector2 velocity)
@@ -35,20 +29,29 @@ public class FlockAgent : MonoBehaviour
         transform.position += (Vector3)velocity * Time.deltaTime;
     }
 
-    public void UpdatePosition()
+    public void UpdatePosition(Vector2 velocity)
     {
-        if (Velocity.sqrMagnitude > ParentFlock.MaxAgentSpeed)
+        if (velocity.sqrMagnitude > ParentFlock.MaxAgentSpeed)
         {
-            Velocity = Velocity.normalized * ParentFlock.MaxAgentSpeed;
+            velocity = velocity.normalized * ParentFlock.MaxAgentSpeed;
         }
 
-        transform.up = (Vector3)Velocity;
-        transform.position += (Vector3)Velocity * Time.deltaTime;
+        transform.up = (Vector3)velocity;
+        transform.position += (Vector3)velocity * Time.deltaTime;
     }
 
     private void Start()
     {
         AgentCollider = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if (animator != null)
+        {
+            animator.SetFloat("Minimal distance to another agent in flock", GetMinimalDistanceToAgentInFlock());
+        }
     }
 
     public List<Transform> GetNearbyObjectsByRadius(float radius)
@@ -58,5 +61,14 @@ public class FlockAgent : MonoBehaviour
             .Where(x => x != AgentCollider)
             .Select(x => x.transform)
             .ToList();
+    }
+
+    private float GetMinimalDistanceToAgentInFlock()
+    {
+        var nearbyObjects = GetNearbyObjectsByRadius(ParentFlock.NeighborRadius)
+            .Where(x => x.GetComponent<FlockAgent>() != null && x.GetComponent<FlockAgent>().ParentFlock == ParentFlock)
+            .ToList();
+
+        return nearbyObjects.Select(obj => Vector2.Distance(obj.position, transform.position)).Min();
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Steered Cohesion")]
 public class SteeredCohesionBehavior : FilteredFlockBehavior
 {
-    public ContextFilter Filter;
+    public new ContextFilter Filter;
 
     public float AgentSmoothTime = 0.5f;
 
