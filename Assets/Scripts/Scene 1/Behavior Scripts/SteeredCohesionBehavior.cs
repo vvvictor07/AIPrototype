@@ -6,9 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Steered Cohesion")]
 public class SteeredCohesionBehavior : FilteredFlockBehavior
 {
-    private Vector2 currentVelocity;
+    public ContextFilter Filter;
 
-    public float agentSmoothTime = 0.5f;
+    public float AgentSmoothTime = 0.5f;
+
+    private Vector2 currentVelocity;
 
     public override Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
     {
@@ -48,7 +50,7 @@ public class SteeredCohesionBehavior : FilteredFlockBehavior
         cohesionMove = Vector2.SmoothDamp(agent.transform.up,
                 cohesionMove,
                 ref currentVelocity,
-                agentSmoothTime
+                AgentSmoothTime
             );
 
         return cohesionMove;

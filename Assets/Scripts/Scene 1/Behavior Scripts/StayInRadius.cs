@@ -7,7 +7,7 @@ using UnityEngine;
 public class StayInRadius : FlockBehavior
 {
     [SerializeField]
-    private Vector2 center;
+    private Vector2 center = Vector2.zero;
 
     [SerializeField]
     private float radius = 15;

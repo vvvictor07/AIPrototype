@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Wander")]
 public class WanderBehaviour : FilteredFlockBehavior
 {
+    public ContextFilter Filter;
+
     private Path path = null;
 
     private int currentWaypoint = 0;

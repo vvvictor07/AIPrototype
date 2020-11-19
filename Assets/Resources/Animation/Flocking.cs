@@ -13,7 +13,7 @@ public class Flocking : StateMachineBehaviour
     {
         public FlockBehavior Behavior;
 
-        public ContextFilter Filter;
+        // public ContextFilter Filter;
 
         public float Weight;
     }
@@ -34,26 +34,9 @@ public class Flocking : StateMachineBehaviour
             if (behaviorGroup.Behavior != null)
             {
                 // we need to create new instance of behavior for each state behavior
-                var targetBehaviorTypeName = behaviorGroup.Behavior.GetType().Name;
-                behaviorGroup.Behavior = (FlockBehavior)CreateInstance(targetBehaviorTypeName);
-
-                var behavior = behaviorGroup.Behavior;
-                var typeName = behavior.GetType().BaseType.Name;
-
-                if ((behaviorGroup.Filter != null) && (behaviorGroup.Behavior.GetType().BaseType.Name.Equals("FilteredFlockBehavior")))
-                {
-                    ((FilteredFlockBehavior)behaviorGroup.Behavior).Filter = behaviorGroup.Filter;
-                }
+                behaviorGroup.Behavior = Instantiate(behaviorGroup.Behavior);
             }
         }
-        
-        // Behaviors = new List<BehaviorGroup>
-        //                 {
-        //                     new BehaviorGroup{Behavior = CreateInstance<SteeredCohesionBehavior>().Init(CreateInstance<SameFlockFilter>()), Weight = 5f},
-        //                     // new BehaviorGroup{Behavior = CreateInstance<AvoidanceBehavior>().Init(CreateInstance<SameFlockFilter>()), Weight = 1f},
-        //                     // new BehaviorGroup{Behavior = CreateInstance<StayInRadius>(), Weight = 0.1f},
-        //                     // new BehaviorGroup{Behavior = CreateInstance<CollisionAvoidanceBh>().Init(CreateInstance<SameFlockFilter>()), Weight = 1f},
-        //                 };
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

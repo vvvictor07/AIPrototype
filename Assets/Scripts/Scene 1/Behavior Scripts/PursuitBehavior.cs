@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Pursuit")]
 public class PursuitBehavior : FilteredFlockBehavior
 {
+    public ContextFilter Filter;
+
     public override Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
     {
         var filteredContext = Filter == null ? context : Filter.Filter(agent, context);

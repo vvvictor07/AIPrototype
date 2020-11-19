@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Hide")]
 public class HideBehaviour : FilteredFlockBehavior
 {
+    public ContextFilter Filter;
+
     public ContextFilter obstaclesFilter;
 
     public float hideBehindObstacleDistance = 2f;

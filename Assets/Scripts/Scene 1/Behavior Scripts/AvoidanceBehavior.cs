@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Avoidance")]
 public class AvoidanceBehavior : FilteredFlockBehavior
 {
+    public ContextFilter Filter;
+
     public override Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
     {
         if (context.Count == 0)

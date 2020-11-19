@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Cohesion")]
 public class CohesionBehavior : FilteredFlockBehavior
 {
+    public ContextFilter Filter;
+
     public override Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
     {
         if(context.Count == 0)
