@@ -14,8 +14,6 @@ public class SteeredCohesionBehavior : FilteredFlockBehavior
 
     public override Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
     {
-        Debug.Log("SteeredCohesionBehavior " + GetInstanceID());
-
         // if no neighbours, return no adjustment
         if (context.Count == 0)
         {

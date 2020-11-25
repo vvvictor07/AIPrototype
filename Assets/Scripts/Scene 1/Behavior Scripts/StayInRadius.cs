@@ -16,14 +16,14 @@ public class StayInRadius : FlockBehavior
     {
         // direction to the center
         // magnitude will = distance
-        var centerOffet = center - (Vector2)agent.transform.position;
-        var centerOffetInRadius = centerOffet.magnitude / radius;
+        var centerOffset = center - (Vector2)agent.transform.position;
+        var centerOffsetMagnitude = centerOffset.magnitude / radius;
 
-        if (centerOffetInRadius < 0.9f)
+        if (centerOffsetMagnitude < 0.9f)
         {
             return Vector2.zero;
         }
 
-        return centerOffet * centerOffetInRadius * centerOffetInRadius;
+        return centerOffset * centerOffsetMagnitude * centerOffsetMagnitude;
     }
 }
