@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1052b0a619eeba4aad6e52321d7fd43, type: 3}
-  m_Name: Test Life Characteristics
+  m_Name: Predator Life Characteristics
   m_EditorClassIdentifier: 
-  DriveFactor: 10
-  AgentMaxSpeed: 5
-  NeighborRadius: 1.5
-  AvoidanceRadiusMultiplier: 0.5
-  SmallRadiusMultiplier: 0.2
+  lifeType: 0
+  DriveFactor: 5
+  AgentMaxSpeed: 2
+  NeighborRadius: 4
+  AvoidanceRadiusMultiplier: 0.2
+  SmallRadiusMultiplier: 0.3

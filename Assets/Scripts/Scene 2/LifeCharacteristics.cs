@@ -6,8 +6,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Life/LifeCharacteristics")]
 public class LifeCharacteristics : ScriptableObject
 {
-    // [SerializeField]
-    // private float testField;
+    public enum LifeType
+    {
+        Predator,
+        Prey
+    }
+
+    [SerializeField]
+    private LifeType lifeType;
     
     [Range(1f, 100f)]
     public float DriveFactor = 10f;

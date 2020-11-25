@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// GameObject must have Collider2D attached
+[RequireComponent(typeof(Collider2D))]
 public class Life : MonoBehaviour
 {
+    private Collider2D agentCollider;
+
+    private Animator animator;
+
     [SerializeField]
     private LifeCharacteristics lifeCharacteristics;
 
