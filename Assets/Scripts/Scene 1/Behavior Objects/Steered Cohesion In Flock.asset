@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ff872e0bbd1fb478e5b0498fb27666, type: 3}
-  m_Name: Obstacle Avoid
+  m_Script: {fileID: 11500000, guid: f9683ddbbef96e74faaf5d4e0d42dca3, type: 3}
+  m_Name: Steered Cohesion In Flock
   m_EditorClassIdentifier: 
-  mask:
-    serializedVersion: 2
-    m_Bits: 256
+  Filter: {fileID: 11400000, guid: b63159cc76a243d4db64b0697f14eafc, type: 2}
+  AgentSmoothTime: 0.5

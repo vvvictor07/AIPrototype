@@ -213,8 +213,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 37162195}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.17, y: -0.31, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: -13.23, y: -7.5, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -681,8 +681,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606642969}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.05, y: -0.21, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: 5.73, y: -7.36, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -732,13 +732,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 4426811061439797200, guid: 78d0185a570f1b149b03523a84dc467b,
     type: 3}
-  behavior: {fileID: 11400000, guid: 4408fc748fef0a046870f51a89918a4f, type: 2}
-  startingCount: 10
-  driveFactor: 10
-  maxSpeed: 2
-  neighborRadius: 4
-  avoidanceRadiusMultiplier: 0.2
-  smallRadiusMultiplier: 0.3
+  behavior: {fileID: 0}
+  InitialQuantity: 10
+  DriveFactor: 5
+  MaxAgentSpeed: 2
+  NeighborRadius: 4
+  AvoidanceRadiusMultiplier: 0.2
+  SmallRadiusMultiplier: 0.3
 --- !u!1 &1316641916
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,8 +831,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316641916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.02, y: -0.29, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: -6.82, y: 6.4, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -868,13 +868,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 5332177913551281949, guid: 7ee4d6693c2c9f943942938598406c3d,
     type: 3}
-  behavior: {fileID: 11400000, guid: 6a47628290c81bd4e8b03b4b027f0411, type: 2}
-  startingCount: 100
-  driveFactor: 10
-  maxSpeed: 5
-  neighborRadius: 4
-  avoidanceRadiusMultiplier: 0.3
-  smallRadiusMultiplier: 0.2
+  behavior: {fileID: 0}
+  InitialQuantity: 5
+  DriveFactor: 7
+  MaxAgentSpeed: 5
+  NeighborRadius: 10
+  AvoidanceRadiusMultiplier: 0.3
+  SmallRadiusMultiplier: 0.2
 --- !u!4 &1877240728
 Transform:
   m_ObjectHideFlags: 0

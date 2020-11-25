@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37dea7030c2f6234290c2e06ece3a4f0, type: 3}
-  m_Name: Other Flock Avoidance
+  m_Script: {fileID: 11500000, guid: 032937d11a1fc2746874bad8304b1cf6, type: 3}
+  m_Name: Hide
   m_EditorClassIdentifier: 
-  filter: {fileID: 11400000, guid: 24a5c40e46f86c543be75aec9eabde75, type: 2}
+  Filter: {fileID: 11400000, guid: 24a5c40e46f86c543be75aec9eabde75, type: 2}
+  obstaclesFilter: {fileID: 11400000, guid: 2e60ca2aa960822479da5fb7ea0ade6f, type: 2}
+  hideBehindObstacleDistance: 2

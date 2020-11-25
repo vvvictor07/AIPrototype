@@ -1,25 +1,14 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Flock/Filter/Different Flock")]
-
 public class DifferentFlockFilter : ContextFilter
 {
     public override List<Transform> Filter(FlockAgent agent, List<Transform> original)
     {
-        List<Transform> filtered = new List<Transform>();
-        foreach (Transform item in original)
-        {
-            FlockAgent itemAgent = item.GetComponent<FlockAgent>();
-            if (itemAgent != null) //&& itemAgent.AgentFlock == agent.AgentFlock)
-            {
-                if (itemAgent.AgentFlock != agent.AgentFlock)
-                {
-                    filtered.Add(item);
-                }
-            }
-        }
-        return filtered;
+        return original.Where(x => (x.GetComponent<FlockAgent>() != null) && (x.GetComponent<FlockAgent>().ParentFlock != agent.ParentFlock)).ToList();
     }
 }
