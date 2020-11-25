@@ -50,7 +50,8 @@ public class FlockAgent : MonoBehaviour
     {
         if (animator != null)
         {
-            animator.SetFloat("Minimal distance to another agent in flock", GetMinimalDistanceToAgentInFlock());
+            animator.SetFloat("Minimal distance to agent in flock", GetMinimalDistanceToAgentInFlock());
+            animator.SetFloat("Minimal distance to agent in another flock", GetMinimalDistanceToAgentInAnotherFlock());
         }
     }
 
@@ -69,6 +70,25 @@ public class FlockAgent : MonoBehaviour
             .Where(x => x.GetComponent<FlockAgent>() != null && x.GetComponent<FlockAgent>().ParentFlock == ParentFlock)
             .ToList();
 
-        return nearbyObjects.Select(obj => Vector2.Distance(obj.position, transform.position)).Min();
+        if (nearbyObjects.Any())
+        {
+            return nearbyObjects.Select(obj => Vector2.Distance(obj.position, transform.position)).Min();
+        }
+
+        return ParentFlock.NeighborRadius;
+    }
+
+    private float GetMinimalDistanceToAgentInAnotherFlock()
+    {
+        var nearbyObjects = GetNearbyObjectsByRadius(ParentFlock.NeighborRadius)
+            .Where(x => x.GetComponent<FlockAgent>() != null && x.GetComponent<FlockAgent>().ParentFlock != ParentFlock)
+            .ToList();
+
+        if (nearbyObjects.Any())
+        {
+            return nearbyObjects.Select(obj => Vector2.Distance(obj.position, transform.position)).Min();
+        }
+        
+        return ParentFlock.NeighborRadius;
     }
 }
