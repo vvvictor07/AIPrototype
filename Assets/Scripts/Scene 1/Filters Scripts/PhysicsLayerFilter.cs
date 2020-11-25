@@ -7,10 +7,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Filter/Physics Layer")]
 public class PhysicsLayerFilter : ContextFilter
 {
-    public LayerMask mask;
+    public LayerMask Mask;
 
     public override List<Transform> Filter(FlockAgent agent, List<Transform> original)
     {
-        return original.Where(x => mask == (mask | (1 << x.gameObject.layer))).ToList();
+        return original
+            .Where(x => Mask == (Mask | (1 << x.gameObject.layer)))
+            .ToList();
     }
 }

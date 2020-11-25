@@ -6,8 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Steered Cohesion")]
 public class SteeredCohesionBehavior : FilteredFlockBehavior
 {
-    public new ContextFilter Filter;
-
     public float AgentSmoothTime = 0.5f;
 
     private Vector2 currentVelocity;
@@ -30,7 +28,7 @@ public class SteeredCohesionBehavior : FilteredFlockBehavior
         foreach (var item in filteredContext)
         {
             // instead of context
-            if (Vector2.SqrMagnitude(item.position - agent.transform.position) <= agent.ParentFlock.SquareSmallRadius)
+            if (Vector2.Distance(item.position, agent.transform.position) <= agent.ParentFlock.SmallRadius)
             {
                 cohesionMove += (Vector2)item.position;
                 count++;
