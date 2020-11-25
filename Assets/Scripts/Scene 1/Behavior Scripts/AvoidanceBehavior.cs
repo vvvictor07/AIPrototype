@@ -6,8 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Avoidance")]
 public class AvoidanceBehavior : FilteredFlockBehavior
 {
-    public new ContextFilter Filter;
-
     public override Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
     {
         if (context.Count == 0)
@@ -23,7 +21,7 @@ public class AvoidanceBehavior : FilteredFlockBehavior
         foreach (var item in filteredContext)
         {
             // instead of context
-            if (Vector2.SqrMagnitude(item.position - agent.transform.position) <= agent.ParentFlock.SquareAvoidanceRadius)
+            if (Vector2.Distance(item.position, agent.transform.position) <= agent.ParentFlock.AvoidanceRadius)
             {
                 numAvoid++;
                 avoidanceMove += (Vector2)(agent.transform.position - item.position);

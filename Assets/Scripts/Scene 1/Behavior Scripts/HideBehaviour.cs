@@ -1,31 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Flock/Behavior/Hide")]
 public class HideBehaviour : FilteredFlockBehavior
 {
-    public ContextFilter Filter;
-
     public ContextFilter obstaclesFilter;
 
     public float hideBehindObstacleDistance = 2f;
 
     public override Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
     {
-        if (context.Count == 0)
-        {
-            return Vector2.zero;
-        }
-
         // hide from
         var filteredContext = Filter == null ? context : Filter.Filter(agent, context);
 
         // hide behind
         var obstacleContext = Filter == null ? context : obstaclesFilter.Filter(agent, context);
 
-        if (filteredContext.Count == 0)
+        if (!filteredContext.Any() || !obstacleContext.Any())
         {
             return Vector2.zero;
         }
@@ -43,12 +37,6 @@ public class HideBehaviour : FilteredFlockBehavior
                 nearestDistance = distance;
                 nearestObstacle = item;
             }
-        }
-
-        // if no obstacle
-        if (nearestObstacle == null)
-        {
-            return Vector2.zero;
         }
 
         // find best hiding spot

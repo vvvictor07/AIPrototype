@@ -9,6 +9,8 @@ public class DifferentFlockFilter : ContextFilter
 {
     public override List<Transform> Filter(FlockAgent agent, List<Transform> original)
     {
-        return original.Where(x => (x.GetComponent<FlockAgent>() != null) && (x.GetComponent<FlockAgent>().ParentFlock != agent.ParentFlock)).ToList();
+        return original
+            .Where(x => x.GetComponent<FlockAgent>() != null && x.GetComponent<FlockAgent>().ParentFlock != agent.ParentFlock)
+            .ToList();
     }
 }

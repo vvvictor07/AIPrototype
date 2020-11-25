@@ -12,15 +12,11 @@ public class FlockAgent : MonoBehaviour
 
     public Collider2D AgentCollider;
 
-    // public Vector2 Velocity;
-
     private Animator animator;
 
     public void Initialize(Flock flock)
     {
         ParentFlock = flock;
-
-        // Velocity = Vector2.up;
     }
 
     public void Move(Vector2 velocity)
@@ -31,13 +27,22 @@ public class FlockAgent : MonoBehaviour
 
     public void UpdatePosition(Vector2 velocity)
     {
-        if (velocity.sqrMagnitude > ParentFlock.MaxAgentSpeed)
+        if (velocity.sqrMagnitude > ParentFlock.AgentMaxSpeed)
         {
-            velocity = velocity.normalized * ParentFlock.MaxAgentSpeed;
+            velocity = velocity.normalized * ParentFlock.AgentMaxSpeed;
         }
 
         transform.up = (Vector3)velocity;
         transform.position += (Vector3)velocity * Time.deltaTime;
+    }
+
+    public List<Transform> GetNearbyObjectsByRadius(float radius)
+    {
+        return Physics2D
+            .OverlapCircleAll(transform.position, radius)
+            .Where(x => x != AgentCollider)
+            .Select(x => x.transform)
+            .ToList();
     }
 
     private void Start()
@@ -53,15 +58,6 @@ public class FlockAgent : MonoBehaviour
             animator.SetFloat("Minimal distance to agent in flock", GetMinimalDistanceToAgentInFlock());
             animator.SetFloat("Minimal distance to agent in another flock", GetMinimalDistanceToAgentInAnotherFlock());
         }
-    }
-
-    public List<Transform> GetNearbyObjectsByRadius(float radius)
-    {
-        return Physics2D
-            .OverlapCircleAll(transform.position, radius)
-            .Where(x => x != AgentCollider)
-            .Select(x => x.transform)
-            .ToList();
     }
 
     private float GetMinimalDistanceToAgentInFlock()
@@ -88,7 +84,7 @@ public class FlockAgent : MonoBehaviour
         {
             return nearbyObjects.Select(obj => Vector2.Distance(obj.position, transform.position)).Min();
         }
-        
+
         return ParentFlock.NeighborRadius;
     }
 }

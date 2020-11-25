@@ -730,12 +730,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48517f4f743af6740957e313a7b1e25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 4426811061439797200, guid: 78d0185a570f1b149b03523a84dc467b,
+  AgentPrefab: {fileID: 4426811061439797200, guid: 78d0185a570f1b149b03523a84dc467b,
     type: 3}
-  behavior: {fileID: 0}
   InitialQuantity: 10
   DriveFactor: 5
-  MaxAgentSpeed: 2
+  AgentMaxSpeed: 2
   NeighborRadius: 4
   AvoidanceRadiusMultiplier: 0.2
   SmallRadiusMultiplier: 0.3
@@ -866,12 +865,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48517f4f743af6740957e313a7b1e25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 5332177913551281949, guid: 7ee4d6693c2c9f943942938598406c3d,
+  AgentPrefab: {fileID: 5332177913551281949, guid: 7ee4d6693c2c9f943942938598406c3d,
     type: 3}
-  behavior: {fileID: 0}
   InitialQuantity: 5
   DriveFactor: 7
-  MaxAgentSpeed: 5
+  AgentMaxSpeed: 5
   NeighborRadius: 10
   AvoidanceRadiusMultiplier: 0.3
   SmallRadiusMultiplier: 0.2

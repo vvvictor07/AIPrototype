@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Flock/FSMBehavior/Flocking")]
-
 public class CompositeStateBehavior : StateMachineBehaviour
 {
     [System.Serializable]
@@ -48,7 +47,7 @@ public class CompositeStateBehavior : StateMachineBehaviour
         {
             var partialVelocity = behaviorGroup.Behavior.CalculateMoveSpeed(flockAgent, nearbyObjects).normalized;
             partialVelocity *= flockAgent.ParentFlock.DriveFactor;
-            newVelocity += partialVelocity * behaviorGroup.Weight / totalWeight;
+            newVelocity += (partialVelocity * behaviorGroup.Weight) / totalWeight;
         }
 
         // flockAgent.Velocity += Vector2.Lerp(flockAgent.Velocity, newVelocity, newVelocity.magnitude / flockAgent.ParentFlock.NeighborRadius);

@@ -6,8 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Alignment")]
 public class AlignmentBehavior : FilteredFlockBehavior
 {
-    public ContextFilter Filter;
-    
     public override Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
     {
         if (context.Count == 0)
@@ -25,7 +23,7 @@ public class AlignmentBehavior : FilteredFlockBehavior
         foreach (var item in filteredContext)
         {
             // instead of context
-            if (Vector2.SqrMagnitude(item.position - agent.transform.position) <= agent.ParentFlock.SquareSmallRadius)
+            if (Vector2.Distance(item.position, agent.transform.position) <= agent.ParentFlock.SmallRadius)
             {
                 alignmentMove += (Vector2)item.transform.up;
                 count++;

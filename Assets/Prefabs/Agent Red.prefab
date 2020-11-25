@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cde311ef8fda67499864fd749b3530c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParentFlock: {fileID: 0}
+  AgentCollider: {fileID: 3831478397042218669}
 --- !u!95 &6702624953673713823
 Animator:
   serializedVersion: 3
