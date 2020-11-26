@@ -1,10 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Scene_1.Filters_Scripts;
 
 using UnityEngine;
 
-public abstract class FilteredFlockBehavior : FlockBehavior
+namespace Assets.Scripts.Scene_1
 {
-    [SerializeField]
-    public ContextFilter Filter;
+    public abstract class FilteredFlockBehavior : FlockBehavior
+    {
+        [SerializeField]
+        public ContextFilter Filter;
+    }
 }

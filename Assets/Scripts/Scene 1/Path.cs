@@ -1,42 +1,44 @@
-using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
-public class Path : MonoBehaviour
+namespace Assets.Scripts.Scene_1
 {
-    public List<Transform> waypoints;
-
-    public float radius;
-
-    public float stayInRadiusPrecent = 0.9f;
-
-    [SerializeField]
-    private Vector3 gizmoSize = Vector3.one;
-
-    private void OnDrawGizmos()
+    public class Path : MonoBehaviour
     {
-        if (waypoints == null || waypoints.Count == 0)
-        {
-            return; // exit method
-        }
+        public List<Transform> waypoints;
 
-        for (var i = 0; i < waypoints.Count; i++)
-        {
-            var waypoint = waypoints[i];
+        public float radius;
 
-            if (waypoint == null)
+        public float stayInRadiusPrecent = 0.9f;
+
+        [SerializeField]
+        private Vector3 gizmoSize = Vector3.one;
+
+        private void OnDrawGizmos()
+        {
+            if (waypoints == null || waypoints.Count == 0)
             {
-                continue; // go to next interation of this loop (if 1 is 0, i becomes 1 ect)
+                return; // exit method
             }
 
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawCube(waypoint.position, gizmoSize);
-
-            if (i + 1 < waypoints.Count && waypoints[i + 1] != null)
+            for (var i = 0; i < waypoints.Count; i++)
             {
-                // check if waypoint is valid
-                Gizmos.DrawLine(waypoint.position, waypoints[i + 1].position); // draw line to next waypoint
+                var waypoint = waypoints[i];
+
+                if (waypoint == null)
+                {
+                    continue; // go to next interation of this loop (if 1 is 0, i becomes 1 ect)
+                }
+
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawCube(waypoint.position, gizmoSize);
+
+                if (i + 1 < waypoints.Count && waypoints[i + 1] != null)
+                {
+                    // check if waypoint is valid
+                    Gizmos.DrawLine(waypoint.position, waypoints[i + 1].position); // draw line to next waypoint
+                }
             }
         }
     }

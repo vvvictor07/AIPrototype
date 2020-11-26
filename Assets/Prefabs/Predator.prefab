@@ -121,5 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3233139ece6beb54fbe3b25088f9de4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeCharacteristics: {fileID: 11400000, guid: d0526b686531b284fb3379ba10dc1bc6,
-    type: 2}
+  Type: 0
+  Characteristics: {fileID: 11400000, guid: d0526b686531b284fb3379ba10dc1bc6, type: 2}
