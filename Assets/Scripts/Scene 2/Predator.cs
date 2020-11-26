@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Predator : Life
+namespace Assets.Scripts.Scene_2
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Predator : Life
     {
-        
-    }
+        // Start is called before the first frame update
+        public new void Start()
+        {
+            base.Start();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Update is called once per frame
+        public new void Update()
+        {
+            base.Update();
+        }
     }
 }
