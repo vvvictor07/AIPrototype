@@ -20,39 +20,39 @@ namespace Assets.Scripts.Scene_2.Behaviors
                 return Vector2.zero;
             }
 
-            // // all add points together and average
-            // var cohesionMove = Vector2.zero;
-            //
-            // // if (filter == null) { filteredContext = context} else {filter.Filter(agent,context)}
-            // var filteredContext = Filter == null ? context : Filter.Filter(life, context);
-            // var count = 0;
-            //
-            // foreach (var item in filteredContext)
-            // {
-            //     // instead of context
-            //     if (Vector2.Distance(item.position, agent.transform.position) <= agent.ParentFlock.SmallRadius)
-            //     {
-            //         cohesionMove += (Vector2)item.position;
-            //         count++;
-            //     }
-            // }
-            //
-            // if (count != 0)
-            // {
-            //     cohesionMove /= count;
-            // }
-            //
-            // // create offset from agent position
-            // cohesionMove -= (Vector2)agent.transform.position;
-            //
-            // cohesionMove = Vector2.SmoothDamp(agent.transform.up,
-            //         cohesionMove,
-            //         ref currentVelocity,
-            //         AgentSmoothTime
-            //     );
-            //
-            // return cohesionMove;
-            return Vector2.zero;
+            // all add points together and average
+            var cohesionMove = Vector2.zero;
+
+            // if (filter == null) { filteredContext = context} else {filter.Filter(agent,context)}
+            var filteredContext = Filter == null ? context : Filter.Filter(context, life);
+            var count = 0;
+
+            foreach (var item in filteredContext)
+            {
+                // instead of context
+                if (Vector2.Distance(item.position, life.transform.position) <= life.Characteristics.SmallRadius)
+                {
+                    cohesionMove += (Vector2)item.position;
+                    count++;
+                }
+            }
+
+            if (count != 0)
+            {
+                cohesionMove /= count;
+
+                // create offset from agent position
+                cohesionMove -= (Vector2)life.transform.position;
+
+                cohesionMove = Vector2.SmoothDamp(
+                        life.transform.up,
+                        cohesionMove,
+                        ref currentVelocity,
+                        AgentSmoothTime
+                    );
+            }
+
+            return cohesionMove;
         }
     }
 }

@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ed8712721428f4b8677abef0899b82, type: 3}
-  m_Name: Alignment In Flock
+  m_Script: {fileID: 11500000, guid: 3f3b2599afa6624459266a0a65e81cf7, type: 3}
+  m_Name: Path Filter
   m_EditorClassIdentifier: 
-  Filter: {fileID: 11400000, guid: 81e96e99c39d84b4aa8858ec25418851, type: 2}
+  mask:
+    serializedVersion: 2
+    m_Bits: 512

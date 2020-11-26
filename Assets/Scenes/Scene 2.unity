@@ -218,6 +218,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Predator
       objectReference: {fileID: 0}
+    - target: {fileID: 3523735855514240797, guid: f62827f6cfe28dc488d25622b46873ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f62827f6cfe28dc488d25622b46873ea, type: 3}
 --- !u!1 &1431196261
@@ -283,7 +288,7 @@ MonoBehaviour:
     type: 3}
   preyPrefab: {fileID: 2564266419940377665, guid: c4b1d1d8db39e7e4f931922ac5c415fb,
     type: 3}
-  predatorCount: 2
+  predatorCount: 5
   preyCount: 5
 --- !u!4 &1630945112
 Transform:
@@ -393,6 +398,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prey
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564266419940377665, guid: c4b1d1d8db39e7e4f931922ac5c415fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2564266419940377668, guid: c4b1d1d8db39e7e4f931922ac5c415fb,
         type: 3}

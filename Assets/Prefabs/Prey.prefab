@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2564266419940377667}
   - component: {fileID: 4990902506031726714}
   - component: {fileID: 6773367947889410403}
+  - component: {fileID: 8429119705667527708}
   m_Layer: 0
   m_Name: Prey
   m_TagString: Untagged
@@ -123,3 +124,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   Characteristics: {fileID: 11400000, guid: 531ac84aba7863d4c9aa11d6c8bd83fd, type: 2}
+--- !u!95 &8429119705667527708
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2564266419940377665}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 41c6b6d1c0cc025499605318f06e81f8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

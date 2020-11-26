@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ff872e0bbd1fb478e5b0498fb27666, type: 3}
   m_Name: Path
   m_EditorClassIdentifier: 
-  mask:
+  Mask:
     serializedVersion: 2
     m_Bits: 512

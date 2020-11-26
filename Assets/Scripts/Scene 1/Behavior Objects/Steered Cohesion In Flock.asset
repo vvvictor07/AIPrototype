@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9683ddbbef96e74faaf5d4e0d42dca3, type: 3}
   m_Name: Steered Cohesion In Flock
   m_EditorClassIdentifier: 
-  Filter: {fileID: 11400000, guid: b63159cc76a243d4db64b0697f14eafc, type: 2}
+  Filter: {fileID: 11400000, guid: 81e96e99c39d84b4aa8858ec25418851, type: 2}
   AgentSmoothTime: 0.5

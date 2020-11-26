@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1052b0a619eeba4aad6e52321d7fd43, type: 3}
   m_Name: Predator Life Characteristics
   m_EditorClassIdentifier: 
-  lifeType: 0
   DriveFactor: 5
   AgentMaxSpeed: 2
-  NeighborRadius: 4
+  NeighborRadius: 20
   AvoidanceRadiusMultiplier: 0.2
   SmallRadiusMultiplier: 0.3

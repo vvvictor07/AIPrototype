@@ -11,7 +11,7 @@ namespace Assets.Scripts.Scene_2
         [Range(1f, 100f)]
         public float AgentMaxSpeed = 5f;
 
-        [Range(0f, 10f)]
+        [Range(0f, 100f)]
         public float NeighborRadius = 1.5f;
 
         [Range(0f, 1f)]
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Scene_2
 
         public float SmallRadius => smallRadius;
 
-        private void Init()
+        public void Init()
         {
             avoidanceRadius = NeighborRadius * AvoidanceRadiusMultiplier;
             smallRadius = NeighborRadius * SmallRadiusMultiplier;

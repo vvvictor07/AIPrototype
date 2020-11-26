@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3523735855514240771}
   - component: {fileID: 4911709824060567307}
   - component: {fileID: 3523735855514240796}
+  - component: {fileID: 6106096289914267786}
   m_Layer: 0
   m_Name: Predator
   m_TagString: Untagged
@@ -123,3 +124,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   Characteristics: {fileID: 11400000, guid: d0526b686531b284fb3379ba10dc1bc6, type: 2}
+--- !u!95 &6106096289914267786
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3523735855514240797}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 047e3dafe2f99a945b9706ba9a36daec, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

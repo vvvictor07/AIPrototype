@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Assets.Resources.Animation.LifeFSM
 {
     [CreateAssetMenu(menuName = "Life/StateBehaviors/UniversalStateBehavior")]
-    public class UniversalStateBehavior : StateMachineBehaviour
+    public class UniversalLifeStateBehavior : StateMachineBehaviour
     {
         [System.Serializable]
         public class BehaviorGroup

@@ -27,7 +27,7 @@ namespace Assets.Scripts.Scene_2
                 {
                     var predator = Instantiate(
                             predatorPrefab,
-                            Random.insideUnitCircle * predatorCount * 2f,
+                            Random.insideUnitCircle * predatorCount * 0.2f,
                             Quaternion.Euler(Vector3.forward * Random.Range(0, 360f)),
                             transform
                         );
@@ -41,7 +41,7 @@ namespace Assets.Scripts.Scene_2
                 {
                     var predator = Instantiate(
                             preyPrefab,
-                            Random.insideUnitCircle * preyCount * 2f,
+                            Random.insideUnitCircle * preyCount * 0.2f,
                             Quaternion.Euler(Vector3.forward * Random.Range(0, 360f)),
                             transform
                         );

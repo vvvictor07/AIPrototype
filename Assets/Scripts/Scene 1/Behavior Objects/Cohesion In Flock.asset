@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26da446f0ff098147803a69a0f82fef6, type: 3}
   m_Name: Cohesion In Flock
   m_EditorClassIdentifier: 
-  Filter: {fileID: 0}
+  Filter: {fileID: 11400000, guid: 81e96e99c39d84b4aa8858ec25418851, type: 2}

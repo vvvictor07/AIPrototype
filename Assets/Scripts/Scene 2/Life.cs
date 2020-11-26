@@ -53,6 +53,11 @@ namespace Assets.Scripts.Scene_2
         {
             collider = GetComponent<Collider2D>();
             animator = GetComponent<Animator>();
+
+            if (Characteristics != null)
+            {
+                Characteristics.Init();
+            }
         }
 
         // Update is called once per frame
@@ -60,8 +65,8 @@ namespace Assets.Scripts.Scene_2
         {
             if (animator != null)
             {
-                animator.SetFloat("Minimal distance to life same type", GetMinimalDistanceToLifeSameType());
-                animator.SetFloat("Minimal distance to life other type", GetMinimalDistanceToLifeOtherType());
+                animator.SetFloat("Minimal distance to same type life", GetMinimalDistanceToLifeSameType());
+                animator.SetFloat("Minimal distance to other type life", GetMinimalDistanceToLifeOtherType());
             }
         }
 
