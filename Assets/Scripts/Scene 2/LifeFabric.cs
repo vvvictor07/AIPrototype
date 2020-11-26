@@ -5,10 +5,10 @@ using UnityEngine;
 public class LifeFabric : MonoBehaviour
 {
     [SerializeField]
-    private Predator predatorPrefab;
+    private GameObject predatorPrefab;
 
     [SerializeField]
-    private Prey preyPrefab;
+    private GameObject preyPrefab;
 
     [SerializeField]
     [Range(1, 100)]

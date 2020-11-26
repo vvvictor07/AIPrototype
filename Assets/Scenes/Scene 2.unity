@@ -210,9 +210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2821b9759a3c4347998b5968ff42198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  predatorPrefab: {fileID: 3523735855514240796, guid: f62827f6cfe28dc488d25622b46873ea,
+  predatorPrefab: {fileID: 3523735855514240797, guid: f62827f6cfe28dc488d25622b46873ea,
     type: 3}
-  preyPrefab: {fileID: 6773367947889410403, guid: c4b1d1d8db39e7e4f931922ac5c415fb,
+  preyPrefab: {fileID: 2564266419940377665, guid: c4b1d1d8db39e7e4f931922ac5c415fb,
     type: 3}
   predatorCount: 2
   preyCount: 5

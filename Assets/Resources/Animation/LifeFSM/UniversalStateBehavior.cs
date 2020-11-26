@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Flock/FSMBehavior/Flocking")]
-public class CompositeStateBehavior : StateMachineBehaviour
+[CreateAssetMenu(menuName = "Life/StateBehaviors/UniversalStateBehavior")]
+public class UniversalStateBehavior : StateMachineBehaviour
 {
     [System.Serializable]
     public class BehaviorGroup
     {
-        public FlockBehavior Behavior;
+        public LifeBehavior Behavior;
 
         public float Weight;
     }
