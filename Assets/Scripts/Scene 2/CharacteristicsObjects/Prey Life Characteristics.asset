@@ -15,5 +15,5 @@ MonoBehaviour:
   DriveFactor: 7
   AgentMaxSpeed: 5
   NeighborRadius: 20
-  AvoidanceRadiusMultiplier: 0.3
-  SmallRadiusMultiplier: 0.3
+  AvoidanceRadiusMultiplier: 0.1
+  SmallRadiusMultiplier: 0.5

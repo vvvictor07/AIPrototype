@@ -39,17 +39,17 @@ namespace Assets.Scripts.Scene_2.Behaviors
             if (count != 0)
             {
                 cohesionMove /= count;
-
-                // create offset from agent position
-                cohesionMove -= (Vector2)life.transform.position;
-
-                cohesionMove = Vector2.SmoothDamp(
-                        life.transform.up,
-                        cohesionMove,
-                        ref currentVelocity,
-                        AgentSmoothTime
-                    );
             }
+
+            // create offset from agent position
+            cohesionMove -= (Vector2)life.transform.position;
+
+            cohesionMove = Vector2.SmoothDamp(
+                    life.transform.up,
+                    cohesionMove,
+                    ref currentVelocity,
+                    AgentSmoothTime
+                );
 
             return cohesionMove;
         }

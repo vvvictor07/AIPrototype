@@ -10,7 +10,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Minimal distance to other type life
-    m_EventTreshold: 100
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8849379085930075419}
   m_Solo: 0
@@ -46,8 +46,8 @@ MonoBehaviour:
     Weight: 0.5
   - Behavior: {fileID: 11400000, guid: e6d6777458754a64488101dcada3bde2, type: 2}
     Weight: 0.1
-  - Behavior: {fileID: 11400000, guid: 4ebba0f830feb8b4aa636573a8caf883, type: 2}
-    Weight: 0.1
+  - Behavior: {fileID: 11400000, guid: f50ab38dafb76cf409d580816c39e43c, type: 2}
+    Weight: 0.5
   - Behavior: {fileID: 11400000, guid: b74d07851267bb84fa8b77fce907fa69, type: 2}
     Weight: 0.1
 --- !u!1107 &-6931186132969584065
@@ -89,13 +89,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Behaviors:
   - Behavior: {fileID: 11400000, guid: f5e699a0152724941816c2e60001c320, type: 2}
-    Weight: 2
+    Weight: 1
   - Behavior: {fileID: 11400000, guid: 769e124ace5eec44f896da4196448f6d, type: 2}
     Weight: 0.5
   - Behavior: {fileID: 11400000, guid: f6d915f122ab12d40ad1bce9cc440e3b, type: 2}
-    Weight: 0.5
+    Weight: 0
   - Behavior: {fileID: 11400000, guid: e6d6777458754a64488101dcada3bde2, type: 2}
-    Weight: 0.1
+    Weight: 0
   - Behavior: {fileID: 11400000, guid: 4ebba0f830feb8b4aa636573a8caf883, type: 2}
     Weight: 0.1
 --- !u!91 &9100000
