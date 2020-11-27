@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Assets.Scripts.Scene_1
+namespace Assets.Scripts
 {
     public class Path : MonoBehaviour
     {

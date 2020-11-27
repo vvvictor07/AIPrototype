@@ -1,29 +1,21 @@
 using System.Collections.Generic;
-using System.Linq;
 
 using UnityEngine;
 
 namespace Assets.Scripts.Scene_2.Behaviors
 {
-    [CreateAssetMenu(menuName = "Life/Behavior/Steered Cohesion")]
-    public class SteeredCohesionBehavior : LifeBehavior
+    [CreateAssetMenu(menuName = "Life/Behavior/Cohesion")]
+    public class CohesionBehavior : LifeBehavior
     {
-        public float AgentSmoothTime = 0.5f;
-
-        private Vector2 currentVelocity;
-
         public override Vector2 CalculateMoveSpeed(Life life, List<Transform> context)
         {
-            // if no neighbours, return no adjustment
-            if (!context.Any())
+            if (context.Count == 0)
             {
                 return Vector2.zero;
             }
 
-            // all add points together and average
+            // add all points together and get average
             var cohesionMove = Vector2.zero;
-
-            // if (filter == null) { filteredContext = context} else {filter.Filter(agent,context)}
             var filteredContext = Filter == null ? context : Filter.Filter(context, life);
             var count = 0;
 
@@ -41,14 +33,8 @@ namespace Assets.Scripts.Scene_2.Behaviors
                 cohesionMove /= count;
 
                 // create offset from agent position
+                // direction from a to b = b - a
                 cohesionMove -= (Vector2)life.transform.position;
-
-                cohesionMove = Vector2.SmoothDamp(
-                        life.transform.up,
-                        cohesionMove,
-                        ref currentVelocity,
-                        AgentSmoothTime
-                    );
             }
 
             return cohesionMove;
