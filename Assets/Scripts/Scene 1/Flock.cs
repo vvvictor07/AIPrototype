@@ -1,110 +1,66 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 using UnityEngine;
 
-public class Flock : MonoBehaviour
+namespace Assets.Scripts.Scene_1
 {
-    public FlockAgent agentPrefab;
-
-    public FlockBehavior behavior;
-
-    [Range(1, 500)]
-    public int InitialQuantity = 250;
-
-    [Range(1f, 100f)]
-    public float DriveFactor = 10f;
-
-    [Range(1f, 100f)]
-    public float MaxAgentSpeed = 5f;
-
-    [Range(0f, 10f)]
-    public float NeighborRadius = 1.5f;
-
-    [Range(0f, 1f)]
-    public float AvoidanceRadiusMultiplier = 0.5f;
-
-    [Range(0f, 1f)]
-    public float SmallRadiusMultiplier = 0.2f;
-
-    private const float AgentDensity = 0.01f;
-
-    private float squareMaxSpeed;
-
-    private float squareNeighborRadius;
-
-    private float squareAvoidanceRadius;
-
-    private float squareSmallRadius;
-
-    private List<FlockAgent> agents = new List<FlockAgent>();
-
-    public float SquareAvoidanceRadius => squareAvoidanceRadius;
-
-    public float SquareSmallRadius => squareSmallRadius;
-
-    private void Start()
+    public class Flock : MonoBehaviour
     {
-        squareMaxSpeed = MaxAgentSpeed * MaxAgentSpeed;
-        squareNeighborRadius = NeighborRadius * NeighborRadius;
-        squareAvoidanceRadius = squareNeighborRadius * AvoidanceRadiusMultiplier * AvoidanceRadiusMultiplier;
-        squareSmallRadius = squareNeighborRadius * SmallRadiusMultiplier * SmallRadiusMultiplier;
+        public FlockAgent AgentPrefab;
 
-        // loops for startingCount times
-        for (var i = 0; i < InitialQuantity; i++)
-        {
-            var newAgent = Instantiate(
-                    agentPrefab,
-                    Random.insideUnitCircle * InitialQuantity * AgentDensity,
-                    Quaternion.Euler(Vector3.forward * Random.Range(0, 360f)),
-                    transform
-                );
-            newAgent.name = name + " Agent " + i;
-            
-            newAgent.Initialize(this);
-            agents.Add(newAgent);
-        }
-    }
+        [Range(1, 500)]
+        public int InitialQuantity = 250;
 
-    private void Update()
-    {
-        if (behavior != null)
+        [Range(1f, 100f)]
+        public float DriveFactor = 10f;
+
+        [Range(1f, 100f)]
+        public float AgentMaxSpeed = 5f;
+
+        [Range(0f, 10f)]
+        public float NeighborRadius = 1.5f;
+
+        [Range(0f, 1f)]
+        public float AvoidanceRadiusMultiplier = 0.5f;
+
+        [Range(0f, 1f)]
+        public float SmallRadiusMultiplier = 0.2f;
+
+        private const float AgentDensity = 0.01f;
+
+        private float avoidanceRadius;
+
+        private float smallRadius;
+
+        private List<FlockAgent> agents = new List<FlockAgent>();
+
+        public float AvoidanceRadius => avoidanceRadius;
+
+        public float SmallRadius => smallRadius;
+
+        private void Start()
         {
-            foreach (var agent in agents)
+            avoidanceRadius = NeighborRadius * AvoidanceRadiusMultiplier;
+            smallRadius = NeighborRadius * SmallRadiusMultiplier;
+
+            // loops for startingCount times
+            for (var i = 0; i < InitialQuantity; i++)
             {
-                var context = GetNearbyObjects(agent);
+                var newAgent = Instantiate(
+                        AgentPrefab,
+                        Random.insideUnitCircle * InitialQuantity * AgentDensity,
+                        Quaternion.Euler(Vector3.forward * Random.Range(0, 360f)),
+                        transform
+                    );
+                newAgent.name = name + " Agent " + i;
 
-                // testing code
-                // agent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f); // closer to 1 is white, closer to 6 is red+++++++++
-
-                var calculatedMoveSpeed = behavior.CalculateMoveSpeed(agent, context);
-                calculatedMoveSpeed *= DriveFactor;
-
-                if (calculatedMoveSpeed.sqrMagnitude > squareMaxSpeed)
-                {
-                    calculatedMoveSpeed = calculatedMoveSpeed.normalized * MaxAgentSpeed;
-                }
-
-                agent.Move(calculatedMoveSpeed);
-
-            }
-        }
-    }
-
-    private List<Transform> GetNearbyObjects(FlockAgent agent)
-    {
-        var context = new List<Transform>();
-        var contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, NeighborRadius);
-        
-        foreach (var c in contextColliders)
-        {
-            if (c != agent.AgentCollider)
-            {
-                context.Add(c.transform);
+                newAgent.Initialize(this);
+                agents.Add(newAgent);
             }
         }
 
-        return context;
+        private void Update()
+        {
+        }
     }
 }

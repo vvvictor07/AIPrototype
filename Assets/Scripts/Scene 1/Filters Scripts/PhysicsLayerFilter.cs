@@ -4,13 +4,18 @@ using System.Linq;
 
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Flock/Filter/Physics Layer")]
-public class PhysicsLayerFilter : ContextFilter
+namespace Assets.Scripts.Scene_1.Filters_Scripts
 {
-    public LayerMask mask;
-
-    public override List<Transform> Filter(FlockAgent agent, List<Transform> original)
+    [CreateAssetMenu(menuName = "Flock/Filter/Physics Layer")]
+    public class PhysicsLayerFilter : ContextFilter
     {
-        return original.Where(x => mask == (mask | (1 << x.gameObject.layer))).ToList();
+        public LayerMask Mask;
+
+        public override List<Transform> Filter(FlockAgent agent, List<Transform> original)
+        {
+            return original
+                .Where(x => Mask == (Mask | (1 << x.gameObject.layer)))
+                .ToList();
+        }
     }
 }
