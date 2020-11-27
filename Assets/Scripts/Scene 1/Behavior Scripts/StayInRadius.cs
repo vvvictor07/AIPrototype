@@ -1,29 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Flock/Behavior/Stay In Radius")]
-public class StayInRadius : FlockBehavior
+namespace Assets.Scripts.Scene_1.Behavior_Scripts
 {
-    [SerializeField]
-    private Vector2 center = Vector2.zero;
-
-    [SerializeField]
-    private float radius = 15;
-
-    public override Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
+    [CreateAssetMenu(menuName = "Flock/Behavior/Stay In Radius")]
+    public class StayInRadius : FlockBehavior
     {
-        // direction to the center
-        // magnitude will = distance
-        var centerOffset = center - (Vector2)agent.transform.position;
-        var centerOffsetMagnitude = centerOffset.magnitude / radius;
+        [SerializeField]
+        private Vector2 center = Vector2.zero;
 
-        if (centerOffsetMagnitude < 0.9f)
+        [SerializeField]
+        private float radius = 15;
+
+        public override Vector2 CalculateMoveSpeed(FlockAgent agent, List<Transform> context)
         {
-            return Vector2.zero;
-        }
+            // direction to the center
+            // magnitude will = distance
+            var centerOffset = center - (Vector2)agent.transform.position;
+            var centerOffsetMagnitude = centerOffset.magnitude / radius;
 
-        return centerOffset * centerOffsetMagnitude * centerOffsetMagnitude;
+            if (centerOffsetMagnitude < 0.9f)
+            {
+                return Vector2.zero;
+            }
+
+            return centerOffset * centerOffsetMagnitude * centerOffsetMagnitude;
+        }
     }
 }

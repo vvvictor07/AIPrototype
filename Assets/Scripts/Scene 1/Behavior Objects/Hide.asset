@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032937d11a1fc2746874bad8304b1cf6, type: 3}
   m_Name: Hide
   m_EditorClassIdentifier: 
-  Filter: {fileID: 11400000, guid: 24a5c40e46f86c543be75aec9eabde75, type: 2}
+  Filter: {fileID: 11400000, guid: 4a7ebb4ee0f948546905e3e78a8a50a6, type: 2}
   obstaclesFilter: {fileID: 11400000, guid: 2e60ca2aa960822479da5fb7ea0ade6f, type: 2}
   hideBehindObstacleDistance: 2
